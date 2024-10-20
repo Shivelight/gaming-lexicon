@@ -4,8 +4,12 @@ from os.path import basename
 
 
 def read_n_chars(f, num_chars):
+    """
+    The dictionary uses a binary format where each word preceded by 2 byte length field.
+    The length field is the CHARACTERS length, not BYTES length.
+    """
     chars = []
-    buf = b""
+    buf = b""  # buffer for multi-byte character
     while len(chars) < num_chars:
         buf += f.read(1)
         if not buf:
